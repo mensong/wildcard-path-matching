@@ -490,6 +490,8 @@ void WildcardPathMatcher::remove_wildcard_path(const std::string& wildcard_path)
 	{
         if (wildcard_path == *iter)
 			iter = wildcard_paths_.erase(iter);
+        if (iter == wildcard_paths_.end())
+            break;
 	}
 }
 
