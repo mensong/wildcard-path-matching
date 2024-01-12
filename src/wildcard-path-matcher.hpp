@@ -19,7 +19,7 @@
 #include <sstream>
 #include <algorithm>
 
-namespace octo::wildcardmatching
+namespace wildcardmatching
 {
 class WildcardPathMatcher
 {
@@ -209,10 +209,22 @@ class WildcardPathMatcher
      */
     void add_wildcard_paths(const std::vector<std::string>& wildcard_paths);
     /**
+    * @brief
+    *
+    * @param wildcard_path
+    * @return void
+    */
+    void remove_wildcard_path(const std::string& wildcard_path);
+    /**
      * @brief
      *
      */
     void clean_wildcard_paths();
+    /**
+     * @brief
+     *
+     */
+    bool has_wildcard_paths(const std::string& wildcard_path);
     /**
      * @brief
      * Get the wildcard paths object

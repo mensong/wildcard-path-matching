@@ -9,19 +9,19 @@
  *
  */
 
-#include "octo-wildcardmatching-cpp/wildcard-path-matcher.hpp"
+#include "wildcard-path-matcher.hpp"
 #include <string.h>
 
 namespace
 {
-static constexpr char UNIX_FOLDER_SEPERATOR_CHAR = '/';
-static constexpr char WINDOWS_FOLDER_SEPERATOR_CHAR = '\\';
-static constexpr char SINGLE_WILDCARD_CHAR = '*';
-static constexpr char SINGLE_WILDCARD_STRING[] = "*";
-static constexpr char DOUBLE_WILDCARD_STRING[] = "**";
+	const char UNIX_FOLDER_SEPERATOR_CHAR = '/';
+	const char WINDOWS_FOLDER_SEPERATOR_CHAR = '\\';
+	const char SINGLE_WILDCARD_CHAR = '*';
+	const char SINGLE_WILDCARD_STRING[] = "*";
+	const char DOUBLE_WILDCARD_STRING[] = "**";
 } // namespace
 
-namespace octo::wildcardmatching
+namespace wildcardmatching
 {
 
 WildcardPathMatcher::Wildcard::Wildcard(size_t begin, size_t end)
@@ -484,9 +484,23 @@ void WildcardPathMatcher::add_wildcard_paths(const std::vector<std::string>& wil
     }
 }
 
+void WildcardPathMatcher::remove_wildcard_path(const std::string& wildcard_path)
+{
+	for (std::vector<std::string>::iterator iter = wildcard_paths_.begin(); iter != wildcard_paths_.end(); ++iter)
+	{
+        if (wildcard_path == *iter)
+			iter = wildcard_paths_.erase(iter);
+	}
+}
+
 void WildcardPathMatcher::clean_wildcard_paths()
 {
     wildcard_paths_.clear();
+}
+
+bool WildcardPathMatcher::has_wildcard_paths(const std::string& wildcard_path)
+{
+    return std::find(wildcard_paths_.begin(), wildcard_paths_.end(), wildcard_path) != wildcard_paths_.end();
 }
 
 std::vector<std::string> WildcardPathMatcher::get_wildcard_paths() const
@@ -518,4 +532,4 @@ std::string WildcardPathMatcher::get_wildcard_match(const std::string& input) co
 
     return "";
 }
-} // namespace octo::wildcardmatching
+} // namespace wildcardmatching
